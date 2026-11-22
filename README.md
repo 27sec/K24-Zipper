@@ -2,6 +2,11 @@
 
 macOS app (Swift / SwiftUI) for creating **Store Only** ZIP archives (no compression), with optional password protection.
 
+<p align="center">
+  <img src="docs/screenshot-light.png" alt="K24 Zipper in light mode: two items set to Separate files with AES-256 password protection" width="49%">
+  <img src="docs/screenshot-dark.png" alt="K24 Zipper in dark mode: two items combined into a Single archive" width="49%">
+</p>
+
 ## Download
 **[⬇ Download the latest release](https://github.com/27sec/K24-Zipper/releases/latest)**. Current version: [K24-Zipper-1.0.0-macOS.zip](https://github.com/27sec/K24-Zipper/releases/download/v1.0.0/K24-Zipper-1.0.0-macOS.zip)
 
@@ -32,6 +37,13 @@ Requires macOS 14+ and the Swift toolchain (Xcode or Command Line Tools).
 
 ```bash
 ./Scripts/build-app.sh          # → dist/K24 Zipper.app
+```
+
+To regenerate the README screenshots (renders the window offscreen; your saved settings are not changed):
+```bash
+swift build -c release
+.build/release/K24Zipper --snapshot docs/screenshot-light.png --password PATHS…
+.build/release/K24Zipper --snapshot docs/screenshot-dark.png --dark --single PATHS…
 ```
 
 ## Command line

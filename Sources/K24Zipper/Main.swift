@@ -13,6 +13,10 @@ enum Main {
             let ok = MainActor.assumeIsolated { IconExporter.export(to: URL(fileURLWithPath: args[1])) }
             exit(ok ? 0 : 1)
         }
+        if args.first == "--snapshot", args.count >= 2 {
+            let ok = MainActor.assumeIsolated { Snapshot.run(Array(args.dropFirst())) }
+            exit(ok ? 0 : 1)
+        }
         K24ZipperApp.main()
     }
 }
