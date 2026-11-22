@@ -1,13 +1,21 @@
 #!/bin/bash
-# Builds "K24 Zipper.app" into ./dist (release build, ad-hoc signed).
+# Builds "K24 Zipper.app" into ./dist (universal arm64 + x86_64 release build, ad-hoc signed).
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
 APP="dist/K24 Zipper.app"
 VERSION="1.0.0"
 
-swift build -c release
-BIN="$(swift build -c release --show-bin-path)/K24Zipper"
+# Build each architecture in its own scratch folder, then merge into one universal binary.
+BINS=()
+for ARCH in arm64 x86_64; do
+  SCRATCH=".build/$ARCH"
+  swift build -c release --triple "$ARCH-apple-macosx14.0" --scratch-path "$SCRATCH"
+  BINS+=("$(swift build -c release --triple "$ARCH-apple-macosx14.0" --scratch-path "$SCRATCH" --show-bin-path)/K24Zipper")
+done
+mkdir -p dist
+BIN="dist/K24Zipper-universal"
+lipo -create "${BINS[@]}" -output "$BIN"
 
 rm -rf "$APP"
 mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources"
