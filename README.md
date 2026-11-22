@@ -2,6 +2,18 @@
 
 macOS app (Swift / SwiftUI) for creating **Store Only** ZIP archives (no compression), with optional password protection.
 
+## Download
+**[⬇ Download the latest release](https://github.com/27sec/K24-Zipper/releases/latest)**. Current version: [K24-Zipper-1.0.0-macOS.zip](https://github.com/27sec/K24-Zipper/releases/download/v1.0.0/K24-Zipper-1.0.0-macOS.zip)
+
+Requires macOS 14 or later. Universal app (Apple Silicon and Intel).
+
+1. Unzip the download and move **K24 Zipper.app** to the Applications folder.
+2. The app is not notarized by Apple, so macOS blocks the first launch. Right-click the app → **Open** → **Open**.
+3. If macOS says the app is damaged, run:
+   ```bash
+   xattr -dr com.apple.quarantine "/Applications/K24 Zipper.app"
+   ```
+
 ## Features
 - **Single archive**: combine every item into one ZIP (you can name it).
 - **Separate files**: one ZIP per file or folder (`Photos` → `Photos.zip`, `Report.pdf` → `Report.zip`).
